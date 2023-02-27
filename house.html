@@ -1,0 +1,2097 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>房地产估价报告自动改错系统</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+    <!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 -->
+    <!-- 警告：通过 file:// 协议（就是直接将 html 页面拖拽到浏览器中）访问页面时 Respond.js 不起作用 -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.jsdelivr.cn/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+      <script src="https://cdn.jsdelivr.cn/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+
+
+</head>
+<body>
+      
+       <div class="container">
+
+                  <nav class = "navbar navbar-inverse" role = "navigation">
+         <div class = "navbar-header">
+            <a class = "navbar-brand" href = "#" style="color:white">欢迎大家使用吴昊最新的科研成果</a>
+         </div>
+         <div>
+            <ul class = "nav navbar-nav">
+               <li><a href = "#" id="subtract">估价报告信息提取和纠错</a></li>
+               <li><a href = "#" id="reset">清除内容</a></li>
+            </ul>
+         </div>
+      </nav>
+
+          <div class="alert alert-success">首先，请大家将案例与分析中的改错题，也就是估价报告放置于这个框框内吧！</div>
+
+          <textarea class="form-control " rows="15" id="contact"></textarea>
+
+          <div class="alert alert-info" style="margin-top:20px">封面信息提取</div>
+
+          <div class="input-group">
+            <span class="input-group-addon">估价项目名称</span>
+            <input type="text" id="fname" class="form-control" placeholder="XX市XX区XX号楼第X层房地产XX价值评估" aria-describedby="basic-addon1">
+          </div>
+
+          <div class="input-group" style="margin-top:20px">
+            <span class="input-group-addon">估价委托人</span>
+            <input type="text" id="fwt" class="form-control" placeholder="XXX集团有限公司" aria-describedby="basic-addon1">
+          </div>
+
+          <div class="input-group" style="margin-top:20px">
+            <span class="input-group-addon">房地产估价机构</span>
+            <input type="text" id="fagent" class="form-control" placeholder="XXX房地产估价有限公司" aria-describedby="basic-addon1">
+          </div>
+
+          <div class="input-group" style="margin-top:20px">
+            <span class="input-group-addon">注册房地产估价师</span>
+            <input type="text" id="fgjs" class="form-control" placeholder="XXX（注册号XXX）XXX（注册号XXX）" aria-describedby="basic-addon1">
+          </div>
+
+           <div class="input-group" style="margin-top:20px">
+            <span class="input-group-addon">估价报告出具日期</span>
+            <input type="text" id="fdate" class="form-control" placeholder="XXXX年XX月XX日——XXXX年XX月XX日" aria-describedby="basic-addon1">
+          </div>
+
+          <div class="input-group" style="margin-top:20px">
+            <span class="input-group-addon">估价报告编号</span>
+            <input type="text" id="fno" class="form-control" placeholder="XXX(房估)(抵)字第XXX号" aria-describedby="basic-addon1">
+          </div>
+          
+          <div class="alert alert-info" style="margin-top:20px">委托函信息提取</div>
+
+          <div class="input-group">
+            <span class="input-group-addon">估价目的</span>
+            <input type="text" id="w_aim" class="form-control" placeholder="为确定房地产XX额度参考依据而评估房地产XX价值" aria-describedby="basic-addon1">
+          </div>
+
+          <button style="margin-top:20px" class="btn btn-danger" type="button">
+            估价对象详细描述 <span class="badge">委托函</span>
+          </button>
+
+          <textarea style="margin-top:20px" class="form-control " rows="6" id="w_des" placeholder="这里主要描述估价对象的实物，权益，区位状况"></textarea>
+          
+          <div class="input-group" style="margin-top:20px">
+            <span class="input-group-addon">估价对象有效期</span>
+            <input type="text" id="w_period" class="form-control" placeholder="XX年" aria-describedby="basic-addon1">
+          </div>
+
+          <div class="input-group" style="margin-top:20px">
+            <span class="input-group-addon">估价对象实地查勘情况</span>
+            <input type="text" id="w_check" class="form-control" placeholder="这里记录估价对象的现场查勘情况，也是委托函的必备项" aria-describedby="basic-addon1">
+          </div>
+
+          <div class="input-group" style="margin-top:20px">
+            <span class="input-group-addon">估价方法的说明和定义</span>
+            <input type="text" id="w_way" class="form-control" placeholder="房地产估价的方法有市场比较法，收益法，成本法，假设开发法四种，一般的估价报告选择其中的两种方法，在委托函中需要说明估价方法的定义和理由" aria-describedby="basic-addon1">
+          </div>
+
+          <div class="input-group" style="margin-top:20px">
+            <span class="input-group-addon">估价时点</span>
+            <input type="text" id="w_time" class="form-control" placeholder="XXXX年XX月XX日" aria-describedby="basic-addon1">
+          </div>
+          
+          <div class="input-group" style="margin-top:20px">
+            <span class="input-group-addon">价值类型</span>
+            <input type="text" id="w_type" class="form-control" placeholder="房地产XX价值" aria-describedby="basic-addon1">
+          </div>
+
+          <div class="alert alert-info" style="margin-top:20px">估价结果报告信息提取</div>
+
+          <div class="input-group">
+            <span class="input-group-addon">估价目的</span>
+            <input type="text" id="aim" class="form-control" placeholder="为确定房地产XX额度参考依据而评估房地产XX价值" aria-describedby="basic-addon1">
+          </div>
+
+          <button style="margin-top:20px" class="btn btn-danger" type="button">
+            估价对象详细描述 <span class="badge">结果报告</span>
+          </button>
+
+          <textarea style="margin-top:20px" class="form-control " rows="6" id="des" placeholder="这里主要描述估价对象的实物，权益，区位状况"></textarea>
+
+          <div class="input-group" style="margin-top:20px">
+            <span class="input-group-addon">估价时点</span>
+            <input type="text" id="e_time" class="form-control" placeholder="XXXX年XX月XX日" aria-describedby="basic-addon1">
+          </div>
+
+          <div class="input-group" style="margin-top:20px">
+            <span class="input-group-addon">价值定义</span>
+            <input type="text" id="def" class="form-control" placeholder="房地产XX价值" aria-describedby="basic-addon1">
+          </div>
+
+          <div class="input-group" style="margin-top:20px">
+            <span class="input-group-addon">估价原则</span>
+            <input type="text" id="prin" class="form-control" placeholder="这里描述房地产估价的原则，抵押估价需要写明谨慎原则" aria-describedby="basic-addon1">
+          </div>
+
+          <button style="margin-top:20px" class="btn btn-warning" type="button">
+            估价依据 <span class="badge">结果报告</span>
+          </button>
+
+          <textarea style="margin-top:20px" class="form-control " rows="6" id="accord" placeholder="这里确定估价依据"></textarea>
+
+          <button style="margin-top:20px" class="btn btn-warning" type="button">
+            估价方法 <span class="badge">结果报告</span>
+          </button>
+
+          <textarea style="margin-top:20px" class="form-control " rows="3" id="way" placeholder="这里描述估价方法的定义和理由"></textarea>
+
+          <button style="margin-top:20px" class="btn btn-warning" type="button">
+            估价结果 <span class="badge">结果报告</span>
+          </button>
+
+          <textarea style="margin-top:20px" class="form-control " rows="6" id="result" placeholder="这里确定估价结果"></textarea>
+
+          <div class="input-group" style="margin-top:20px">
+            <span class="input-group-addon">估价人员</span>
+            <input type="text" id="staff" class="form-control" placeholder="需要让估价人员签字，而不是盖章哦" aria-describedby="basic-addon1">
+          </div>
+
+          <div class="input-group" style="margin-top:20px">
+            <span class="input-group-addon">估价作业期</span>
+            <input type="text" id="sche" class="form-control" placeholder="XXXX年XX月XX日——XXXX年XX月XX日" aria-describedby="basic-addon1">
+          </div>
+
+          <div class="input-group" style="margin-top:20px">
+            <span class="input-group-addon">估价报告应用的有效期</span>
+            <input type="text" id="effe" class="form-control" placeholder="一般情况下为1年" aria-describedby="basic-addon1">
+          </div>
+
+          <div class="input-group" style="margin-top:20px">
+            <span class="input-group-addon">实地查勘期</span>
+            <input type="text" id="cha" class="form-control" placeholder="实地查勘的日期" aria-describedby="basic-addon1">
+          </div>
+          
+          <div class="input-group" style="margin-top:20px">
+            <span class="input-group-addon">变现能力分析</span>
+            <input type="text" id="turn_money" class="form-control" placeholder="只有抵押，拍卖估价会要求进行变现能力分析" aria-describedby="basic-addon1">
+          </div>
+
+          <div class="input-group" style="margin-top:20px">
+            <span class="input-group-addon">风险提示</span>
+            <input type="text" id="disa" class="form-control" placeholder="房地产变现会产生风险，这在抵押，拍卖估价的时候要注意" aria-describedby="basic-addon1">
+          </div>
+
+          <div class="alert alert-info" style="margin-top:20px">估价报告自动纠错</div>
+
+          <textarea class="form-control" rows="40" style="margin-top:20px" id="autos"></textarea>
+          
+          <div class="alert alert-success" style="margin-top:20px" align="center">《房地产估价报告自动改错系统》的版权归属吴昊所有 翻版必究</div>
+
+       </div>
+       
+       
+       <script type="text/javascript">
+
+          //arr存储估价报告对应的数组，str存储估价报告中每一个语句片段
+          var arr;
+          var str;
+
+          //house_struct数组用来存储建筑结构
+          var house_struct = new Array();
+          var cnt;
+          cnt=0;
+
+          reset.onclick=function(){
+           
+           document.getElementById("contact").value=null;
+
+           document.getElementById("fname").value=null;
+           document.getElementById("fwt").value=null;
+           document.getElementById("fagent").value=null;
+           document.getElementById("fgjs").value=null;
+           document.getElementById("fdate").value=null;
+           document.getElementById("fno").value=null;
+
+           //委托函中的估价信息
+           document.getElementById("w_aim").value=null;
+           document.getElementById("w_des").value=null;
+           document.getElementById("w_period").value=null;
+           document.getElementById("w_check").value=null;
+		   
+           document.getElementById("w_way").value=null;
+           document.getElementById("w_time").value=null;
+           document.getElementById("w_type").value=null;
+
+           //估价报告中的估价信息
+           document.getElementById("aim").value=null;
+           document.getElementById("des").value=null;
+           document.getElementById("e_time").value=null;
+           document.getElementById("def").value=null;
+           document.getElementById("accord").value=null;
+           document.getElementById("way").value=null;
+           document.getElementById("result").value=null;
+           document.getElementById("staff").value=null;
+           document.getElementById("sche").value=null;
+           document.getElementById("effe").value=null;
+           document.getElementById("prin").value=null;
+           document.getElementById("cha").value=null;
+           document.getElementById("turn_money").value=null;
+           document.getElementById("disa").value=null;
+           
+           //提取自动纠错行
+           document.getElementById("autos").value=null;
+
+          }
+
+         subtract.onclick=function(){
+
+           //设置全局变量flag，来表征系统正在读取的区域
+           //flag=0,表示封面和目录 
+           //flag=1，表示委托函
+           //flag=2，表示结果报告
+           //flag=3，表示技术报告
+           //flag=4，表示附录
+  
+           var flag;
+           //最初赋予flag为0，代表从封面和目录的状态开始
+           flag=0;
+
+           //提取出估价报告的内容
+           var contact=document.getElementById("contact").value;
+
+           //如果估价报告是抵押报告的话，记得要做上标记
+           var mort;
+           mort=0;
+
+           //看看封面和致委托方函,还有附录是否有略去的痕迹
+           var fs,ws,ls;
+           fs=0;
+           ws=0;
+           ls=0;
+
+           //将整个估价报告拆分为多段信息，进行逐段分析
+  arr=contact.split("\n");
+
+  //委托函中的估价目的
+  var is_w_aim;
+  //委托函中的估价对象
+  var is_w_ob;
+  //委托函中的价值时点和价值类型
+  var is_w_time;
+  var is_w_type;
+  //委托函中的致函方是否有分公司信息
+  var is_w_depar;
+
+  //委托函中的估价对象有效期
+  var is_w_period;
+  //委托函中的实地查勘情况
+  var is_w_check;
+  //委托函中的估价方法的说明和定义
+  var is_w_way,is_ww_way;
+  //估价报告中的估价目的
+  var is_aim;
+  //估价报告中的估价对象
+  var is_ob;
+  //估价报告中的估价时点
+  var is_time;
+  //估价报告中的价值定义,估价依据,估价方法,估价结果,估价人员,估价作业期,估价报告的有效期,估价原则,实地查勘情况
+  //变现能力分析，风险提示
+  var is_def;
+  var is_accord;
+  var is_way;
+  var is_result;
+  var is_staff;
+  var is_sche;
+  var is_effe;
+  var is_prin;
+  var is_cha;
+  var is_turn_money;
+  var is_disa;
+  var is_house_use;
+  var is_land_use_man;
+
+  is_house_use=0;
+  is_land_use_man=0;
+  
+  //结果报告中，估价对象关于土地使用性质，产权的描述是否存在
+  var land_use;
+  var pro;
+
+  //结果报告中，他项权利中是否交代如何处理没有注销的他项权利
+  var is_taxiang;
+
+  is_taxiang=0;
+  
+  land_use=0;
+  pro=0;
+
+  //结果报告中，读取建筑物的结构
+  var stru,next_stru;
+  //看看是不是第一次提到结构
+  var is_first;
+  is_first=0;
+  var is_stru_diff;
+  is_stru_diff=0;
+
+  //结果报告中，估价对象的共有权问题
+  var is_common;
+
+  is_common=0;
+  
+  //技术报告中，估价对象如果发生改变用途或者重建，是否得到了政府的批准
+  var gov_permit;
+  var use_change;
+  
+  gov_permit=0;
+  use_change=0;
+  
+  //以下是收益法中发生的错误
+  //结果报告中是否处理了租金水平的变化趋势,是否有土地使用费,年管理费中是否有水电气热等费用
+  //看看年保险费基数是否错误，资本化率取值是否存在依据
+  //看看年有效毛收入的计算天数是不是365天
+
+  var is_rent_dev;
+  var is_land_use;
+  var is_manage_fee;
+  var is_base_error;
+  var is_cap_error;
+  var is_full_year;
+  
+  //比准价格名词错误
+  var is_compare_error;
+  
+  //看看收益年期是否符合要求，比如写字楼的收益年限应该在40年以内，而不是50年
+  var income_dur;
+
+  //看看收益法中是否描述了收租损失
+  var is_rent_lose;
+
+  //看看报酬率取值是否存在依据
+  var is_pay_acc;
+  //看看报酬率是否说明了是预测值
+  var is_pay_guess;
+  //看看收益法在算收益期限的时候，除了考虑房屋的耐用年限以外，是否考虑了房屋的经济寿命
+  var is_eco_life;
+  //看看收益法在净收益流的计算中，是否遵循了谨慎原则，运用了保守估计
+  var is_protect;
+  
+  //以下是成本法中发生的错误
+  //如果运用了基准地价系数修正法，要看看使用年期的公式是否正确
+  //土地价格内涵是否有交代
+  //建筑物重置费用中是否计算了精装修成本费用，相关销售费用
+  //建筑物折旧中经济寿命是否予以考虑，土地使用权是否予以续期，建筑物残值是否给予补偿
+  var is_base_price;
+  var is_land_price_mean;
+  var is_cal_furn;
+  var is_cal_sale;
+  var is_consider_eco;
+  var is_land_use_continue;
+  var is_junk_pay;
+  
+  //以下是假设开发法中发生的错误
+  //看看投资利息中是否包括在建工程投资的利息
+  //看看计算开发完成后价值时有没有加上利润
+  var is_susp_interest;
+  var is_susp_profit;
+
+  //在计算各项成本及税费的时候，做一个记号
+  var tax_fee;
+
+  tax_fee=0;
+  
+  //检查估价结果理由的确定
+  var is_result_base;
+
+  //以下是市场比较法中发生的错误
+  //看看是商服还是办公
+  var usel;
+  usel=0;
+  var is_k1, is_k2;
+  is_k1=0;
+  is_k2=0;
+
+  //看看是实物状况，权益状况，还是区位状况
+  var statek;
+  statek=0;
+  //检验楼层是否是区位状况，楼层信息中是否带有总层数
+  var floor_check,floor_tot;
+  floor_check=0;
+  floor_tot=0;
+  
+  //看看内部装修中是否有毛坯房，如果有的话，希望特别注意
+  var is_bad;
+  is_bad=0;
+
+  //建立比较基础中，看看四大统一是否存在缺项
+  var ccnt;
+  ccnt=0;
+
+  //看看三种状况的调整系数和权重说明了没有
+  var judge_weight;
+  judge_weight=0;
+
+  //看看比较法的最后使用简单算术平均的理由是不是仅仅因为可比实例调整后的价格相近
+  //看看三个可比实例在使用简单算术平均之后，是否阐明了理由
+  var judge_near,judge_reason;
+  judge_near=0;
+  judge_reason=0;
+
+  //看看有没有类似'估价对象比准价格'这样的描述
+  var is_g_compare;
+  is_g_compare=0;
+  
+  //是否已经处理了委托估价的估价目的,估价对象，以及估价报告中的一些概念，这里也一并做上标记
+  is_w_aim=0;
+  is_w_ob=0;
+  is_w_period=0;
+  is_w_check=0;
+  is_w_way=0;
+  is_w_time=0;
+  is_w_type=0;
+  is_w_depar=0;
+  is_aim=0;
+  is_ob=0;
+  is_time=0;
+  is_def=0;
+  is_accord=0;
+  is_way=0;
+  is_result=0;
+  is_staff=0;
+  is_sche=0;
+  is_effe=0;
+  is_prin=0;
+  is_turn_money=0;
+  is_disa=0;
+  is_rent_dev=0;
+  is_land_use=0;
+  is_manage_fee=0;
+  is_base_error=0;
+  is_cap_error=0;
+  is_base_price=0;
+  is_land_price_mean=0;
+  is_cal_furn=0;
+  is_cal_sale=0;
+  is_consider_eco=0;
+  is_land_use_continue=0;
+  is_junk_pay=0;
+  is_result_base=0;
+  income_dur=0;
+  is_compare_error=0;
+  is_susp_interest=0;
+  is_susp_profit=0;
+  is_cha=0;
+  is_rent_lose=0;
+  is_pay_acc=0;
+  is_pay_guess=0;
+  is_eco_life=0;
+  is_protect=0;
+  is_full_year=0;
+  
+  //看看估价报告的四个流程到底缺少哪一个，这五个w分别代表封面目录，委托函，估价结果报告，估价技术报告和附录
+  var w0;
+  var w1;
+  var w2;
+  var w3;
+  var w4;
+  w0=0;
+  w1=0;
+  w2=0;
+  w3=0;
+  w4=0;
+  
+  //定义四大估价方法，并逐一对每一种估价方法进行纠错，如果确定使用具体方法的话，赋值就变为1
+  var market;
+  var cost;
+  var susp;
+  var income;
+  
+  market=0;
+  cost=0;
+  susp=0;
+  income=0;
+
+  //抵押估价中，附件里面是否有法定优先受偿款
+  var is_fa;
+  is_fa=0;
+  //在使用比较法时，看看是否缺少可比实例位置图和外观照片
+  var is_kebi,is_waiguan;
+  is_kebi=0;
+  is_waiguan=0;
+  //附件中，关于专业帮助的说明
+  var is_help;
+  is_help=0;
+  
+  //定义一个指示器，表示当前的错误
+  var pt;
+  pt=1;
+  
+  //定义存储结果的字符串
+  var res;
+  res="";
+  
+    //录入用到的方法
+      var sway;
+      sway="";
+
+     var fname=document.getElementById("fname").value;
+           var fwt=document.getElementById("fwt").value;
+           var fagent=document.getElementById("fagent").value;
+           var fgjs=document.getElementById("fgjs").value;
+           var fdate=document.getElementById("fdate").value;
+           var fno=document.getElementById("fno").value;
+
+           var is_fname;
+           var is_fwt;
+           var is_fagent;
+           var is_fgjs;
+           var is_fdate;
+           var is_fno;
+  
+           is_fname=0;
+           is_fwt=0;
+           is_fagent=0;
+           is_fgjs=0;
+           is_fdate=0;
+           is_fno=0;
+
+           //看看估价报告作业日期是否写成了估价作业期
+           var is_ferror;
+
+           is_ferror=0;
+
+           //委托函中的估价信息
+           var w_aim=document.getElementById("w_aim").value;
+           var w_des=document.getElementById("w_des").value;
+           var w_period=document.getElementById("w_period").value;
+           var w_check=document.getElementById("w_check").value;
+           var w_way=document.getElementById("w_way").value;
+           var w_time=document.getElementById("w_time").value;
+           var w_type=document.getElementById("w_type").value;
+
+           //估价报告中的估价信息
+           var aim=document.getElementById("aim").value;
+           var des=document.getElementById("des").value;
+           var e_time=document.getElementById("e_time").value;
+           var def=document.getElementById("def").value;
+           var accord=document.getElementById("accord").value;
+           var way=document.getElementById("way").value;
+           var result=document.getElementById("result").value;
+           var staff=document.getElementById("staff").value;
+           var sche=document.getElementById("sche").value;
+           var effe=document.getElementById("effe").value;
+           var prin=document.getElementById("prin").value;
+           var cha=document.getElementById("cha").value;
+           var turn_money=document.getElementById("turn_money").value;
+           var disa=document.getElementById("disa").value;
+           
+           //提取自动纠错行
+           var autos=document.getElementById("autos").value;
+           
+           //现在开始对估价报告进行各种分析
+  for(var i=0; i<arr.length; i++)
+  {
+      str=arr[i];
+      
+      if(is_way==1)
+      { 
+        sway=document.getElementById("way").value;
+        is_way=2;
+      }
+      
+      //如果估价报告是抵押报告的话，那么要标上记号
+      if(flag==0 && mort==0 && str.indexOf("抵押")>=0 )
+      {
+        mort=1;
+      }
+      
+      //封面和目录信息提取
+      //估价项目名称提取
+      if(str.indexOf("估价项目名称：")>=0 && flag==0 && is_fname==0)
+      {
+          //提取有效信息
+          document.getElementById("fname").value = fmsg_get(i,"：");
+          is_fname=1;
+      }
+      
+      //估价委托人信息提取
+      if(str.indexOf("估价委托人：")>=0 && flag==0 && is_fwt==0)
+      {
+          //提取有效信息
+          document.getElementById("fwt").value = fmsg_get(i,"：");
+          is_fwt=1;
+      }
+      
+      //房地产估价机构信息提取
+      if(str.indexOf("房地产估价机构：")>=0 && flag==0 && is_fagent==0)
+      {
+          //提取有效信息
+          document.getElementById("fagent").value = fmsg_get(i,"：");
+          is_fagent=1;
+      }
+      
+      //注册房地产估价师信息提取
+      if(str.indexOf("注册房地产估价师：")>=0 && flag==0 && is_fgjs==0)
+      {
+          //提取有效信息
+          document.getElementById("fgjs").value = fmsg_get(i,"：");
+          is_fgjs=1;
+      } 
+          
+      //估价报告出具日期信息提取
+      if((str.indexOf("估价作业期：")>=0 || str.indexOf("估价报告出具日期：")>=0) && flag==0 && is_fdate==0)
+      {
+          //提取有效信息
+          document.getElementById("fdate").value = fmsg_get(i,"：");
+          is_fdate=1;
+          //如果将估价报告出具日期改写为估价作业期，那么应该算错
+          if(str.indexOf("估价作业期")>=0)
+          {
+            is_ferror=1;
+          }
+      } 
+      
+      //估价报告编号提取
+      if(str.indexOf("估价报告编号：")>=0 && flag==0 && is_fno==0)
+      {
+          //提取有效信息
+          document.getElementById("fno").value = fmsg_get(i,"：");
+          is_fno=1;
+      } 
+          
+      //判断结果报告中四大方法具体采用了哪一个方法
+      if(flag==2 && sway!="" && (sway.indexOf("用收益法")>=0 || sway.indexOf("收益法")>=0))
+      {
+        income=1;
+        //这个主要是防止假设开发法的未来房地产价值用收益法的情况
+        if(sway.indexOf("开发完成后")>=0 && sway.indexOf("用收益法")>sway.indexOf("开发完成后"))
+        {
+          susp=1;
+        }
+      }
+      
+      if(flag==2 && sway!="" && sway.indexOf("用成本法")>=0)
+      {
+        cost=1;
+      }
+      
+      if(flag==2 && sway!="" && (sway.indexOf("用假设开发法")>=0 || sway.indexOf("用假开法")>=0))
+      {
+        susp=1;
+      }
+      
+      if(flag==2 && sway!="" && (sway.indexOf("用市场法")>=0 || sway.indexOf("用市场比较法")>=0||sway.indexOf("用比较法")>=0))
+      {
+        market=1;
+        var b;
+        b=0;
+        if(sway.indexOf("用市场法")>0) b=sway.indexOf("用市场法");
+        if(sway.indexOf("用市场比较法")>0) b=sway.indexOf("用市场比较法");
+        if(sway.indexOf("用比较法")>0) b=sway.indexOf("用比较法");
+        if(sway.indexOf("开发完成后")>=0 && b>sway.indexOf("开发完成后"))
+        {
+          market=1;
+        }
+      }
+      
+      //判断目前系统的识别处在哪一个阶段，值得一提的是，封面应该判断一下，有些报告是没有封面的
+      //值得一提的是，如果某个阶段略掉的话，是不判错的
+      if(str.indexOf("封面")>=0 || (flag==0 && str.indexOf("估价报告")>=0) )
+      {
+        flag=0;
+        w0=1;
+        if(str.indexOf("略")>=0) fs=1;
+      }
+      if(str.indexOf("致委托方函")>=0 || str.indexOf("致委托人函")>=0 || str.indexOf("委托函")>=0 || str.indexOf("致估价委托人函")>=0 || str.indexOf("致委托人函")>=0)
+      {
+          flag=1;
+          w1=1;
+          if(str.indexOf("略")>=0) ws=1;
+      }
+      if(str.indexOf("估价结果报告")>=0 || str.indexOf("结果报告")>=0)
+      {
+          flag=2;
+          w2=1;
+      }
+      if(str.indexOf("估价技术报告")>=0 || str.indexOf("技术报告")>=0)
+      {
+          flag=3;
+          w3=1;
+      }
+      if(str.indexOf("附录")>=0 || str.indexOf("附件")>=0)
+      {
+        flag=4;
+        w4=1;
+        if(str.indexOf("略")>=0) ls=1;
+      }
+
+      //我们在这里关注建筑物的结构，看看是否存在混用的情况
+      if(str.indexOf("结构")>=0)
+      {
+        var ins;
+        ins=str.indexOf("结构");
+        if(is_first==0)
+        {
+          //这里具体怎么对应，还是有待商榷的，暂时留大一点
+          stru=str;
+          //alert(stru);
+          is_first=1;
+        }
+        //目前，市场法暂时
+        if(is_first==1)
+        {
+          next_stru=str;
+          //alert(next_stru);
+          if(stru!=next_stru)
+          {
+            is_stru_diff=1;
+            house_struct[cnt]=next_stru;
+            //alert(house_struct[cnt]);
+            cnt=cnt+1;
+          }
+        
+        }
+      }
+
+      //委托函中的估价目的信息自动提取
+      if( (str.indexOf("估价目的、")>=0 || str.indexOf("估价目的：")>=0) && flag==1 && is_w_aim==0)
+      {
+          //提取有效信息
+          //alert(str);
+          if(str.indexOf("估价目的、")>=0)
+          { 
+            document.getElementById("w_aim").value = msg_get(i,"、");
+          }
+          else if(str.indexOf("估价目的：")>=0) 
+          {
+            document.getElementById("w_aim").value = msg_get(i,"：");
+          }
+          is_w_aim=1;
+          if(str.indexOf("略")>=0)
+          {
+            document.getElementById("w_aim").value="略";
+          }
+      }
+      //委托函中的价值时点信息自动提取
+      if( (str.indexOf("估价时点")>=0 || str.indexOf("价值类型")>=0 || str.indexOf("价值时点")>=0) && flag==1 && is_w_time==0)
+      {
+          //提取有效信息
+          //alert(str);
+          if(str.indexOf("价值时点、")>=0) document.getElementById("w_time").value = msg_get(i,"、");
+          else if(str.indexOf("价值时点：")>=0) document.getElementById("w_time").value = msg_get(i,"：");
+          else if(str.indexOf("估价时点：")>=0) document.getElementById("w_time").value = msg_get(i,"：");
+          is_w_time=1;
+          if(str.indexOf("略")>=0)
+          {
+            document.getElementById("w_time").value="略";
+          }
+      }
+      //委托函中的价值类型信息自动提取
+      if(str.indexOf("价值类型")>=0 && flag==1 && is_w_type==0)
+      {
+          //提取有效信息
+          //alert(str);
+          if(str.indexOf("价值类型、")>=0) document.getElementById("w_type").value = msg_get(i,"、");
+          else if(str.indexOf("价值类型：")>=0) document.getElementById("w_type").value = msg_get(i,"：");
+          is_w_type=1;
+          if(str.indexOf("略")>=0)
+          {
+            document.getElementById("w_type").value="略";
+          }
+      }
+      //委托函中的估价对象有效期信息自动提取
+      if( ( str.indexOf("期限")>=0 || str.indexOf("有效期")>=0 ) && flag==1 && is_w_period==0)
+      {
+          is_w_period=1;
+          if(str.indexOf("有效期")>=0) document.getElementById("w_period").value = str;
+          else if(str.indexOf("期限")>=0) document.getElementById("w_period").value = msg_get(i,"：");
+          if(str.indexOf("略")>=0)
+          {
+            document.getElementById("w_period").value = "略";
+          }
+      }
+      //委托函中的估价对象信息自动提取
+      if(str.indexOf("估价对象")>=0 && flag==1 && is_w_ob==0)
+      {
+          //提取有效信息
+          document.getElementById("w_des").value = msg_get(i,"、");
+          is_w_ob=1;
+          if(str.indexOf("略")>=0)
+          {
+            document.getElementById("w_des").value = "略";
+          }
+      }
+      //委托函中的实地查勘信息自动提取
+      if( (str.indexOf("实地查勘")>=0 || str.indexOf("实地查看")>=0) && flag==1 && is_w_check==0)
+      {
+          //提取有效信息
+          document.getElementById("w_check").value = str;
+          is_w_check=1;
+          if(str.indexOf("略")>=0)
+          {
+            document.getElementById("w_check").value = "略";
+          }
+          //看看在委托函的实地查勘中，是否缺少估价师的姓名
+          if(str.indexOf("估价师")<0)
+          {
+            res+="(" + pt + ")" + "注册房地产估价师声明中没有说明现场查勘估价师的姓名。" + "\n";
+            pt=pt+1;
+          }
+      }
+      //委托函中的估价方法和定义的自动提取
+      if(str.indexOf("估价方法")>=0 && flag==1 && is_w_way==0)
+      {
+          //提取有效信息
+          document.getElementById("w_way").value = str;
+          is_w_way=1;
+          if(str.indexOf("定义")>=0 && str.indexOf("理由")>=0) is_ww_way=1;
+          if(str.indexOf("略")>=0)
+          {
+            document.getElementById("w_way").value = "略";
+          }
+      }
+      //委托函中的致函方不能是分公司
+      if(str.indexOf("分公司")>=0 && flag==1 && is_w_depar==0)
+      {
+          is_w_depar=1;
+      }
+      //结果报告中的估价目的信息自动提取
+      if(str.indexOf("估价目的")>=0 && flag==2 && is_aim==0)
+      {
+          //提取有效信息
+          document.getElementById("aim").value = msg_get(i,"、");
+          is_aim=1;
+          //看看估价目的描述的信息是否是准确的
+          res+="(" + "*" + ")" + "看看在估价报告中,估价目的描述的信息是否是准确的。" + "\n";
+          if(document.getElementById("aim").value.indexOf("抵押")>=0)
+          {
+            mort=1;
+          }
+          if(str.indexOf("略")>=0)
+          {
+            document.getElementById("aim").value = "略";
+          }
+      }
+      //结果报告中的估价对象自动提取
+      if(str.indexOf("估价对象")>=0 && flag==2 && is_ob==0)
+      {
+          //提取有效信息，这里要说明的是，文本里面本身有顿号，所以需要更强的区分，这里我暂时这样写咯
+          //鲁棒性不够强，后面会逐渐改正的
+          //这里可能存在多余的顿号，所以为了增加鲁棒性，我在这里这么写
+          //当估价对象后面有几种可能的项目的时候，将所有可能的情形列出来，再比对字符串长度，选出最小的即可
+          var fstr,str1,str2,str3;
+          str1=msg_get(i,"、价值时点");
+          str2=msg_get(i,"、估价时点");
+          str3=msg_get(i,"、估价目的");
+          if(str1.length<str2.length) fstr=str1;
+          else fstr=str2;
+          if(str1.length<str3.length) fstr=str1;
+          else fstr=str3;                                                                      
+          document.getElementById("des").value = fstr;
+          is_ob=1;
+          if(str.indexOf("略")>=0)
+          {
+            document.getElementById("des").value = "略";
+          }
+          //看看估价结果报告中区位状况描述是否缺方位、与重要设施的距离、交通条件、朝向等的介绍
+          if(fstr.indexOf("方位")<0 || fstr.indexOf("距离")<0 || fstr.indexOf("交通条件")<0 || fstr.indexOf("朝向")<0)
+          {
+            res+="(" + pt + ")" + "估价结果报告中区位状况描述中缺方位、与重要设施的距离、交通条件、朝向等介绍。" + "\n";
+            pt=pt+1;
+          }
+          //看看结果报告中，环境景观是否有详细的描述是否过于简单
+          res+="(" + "*" + ")" + "估价结果报告中环境景观及公共设施设备完善程度描述是否过于简单呢？" + "\n";
+      }
+      //结果报告中的估价时点自动提取--这里往往存在一个错误，就是估价时点容易被误写为估价时间
+      if((str.indexOf("估价时点、")>=0 || (str.indexOf("估价时")>=0 && str.indexOf("、")>=0) || str.indexOf("价值时点、")>=0) && flag==2 && is_time==0)
+      {
+          document.getElementById("e_time").value = msg_get(i,"、");
+          is_time=1;
+          if(str.indexOf("略")>=0)
+          {
+            document.getElementById("des").value = "略";
+          }
+          //如果报告中写的不是估价时点，而是估价时间的话，则纠错，这是非常常见的一处错误
+          if(str.indexOf("估价时点")<0 && str.indexOf("价值时点")<0)
+          {
+            res+="(" + pt + ")" + "'估价时X'用语错误，应为估价时点。" + "\n";
+            pt=pt+1;
+          }
+      }
+      //结果报告中的价值定义自动提取
+      if( (str.indexOf("价值定义")>=0 || str.indexOf("价值类型")>=0) && flag==2 && is_def==0)
+      {
+          //提取有效信息
+          document.getElementById("def").value = msg_get(i,"、");
+          is_def=1;
+          if(str.indexOf("略")>=0)
+          {
+            document.getElementById("def").value = "略";
+          }
+      }
+      //结果报告中的估价原则自动提取
+      if(str.indexOf("估价原则")>=0 && flag==2 && is_prin==0)
+      {
+          //提取有效信息
+          document.getElementById("prin").value = msg_get(i,"、");
+          is_prin=1;
+          if(str.indexOf("略")>=0)
+          {
+            document.getElementById("prin").value = "略";
+          }
+      }
+      //结果报告中的估价依据自动提取
+      if(str.indexOf("估价依据")>=0 && flag==2 && is_accord==0)
+      {
+          //提取有效信息，也是同样的问题，估价依据的内容里面本身有顿号
+          document.getElementById("accord").value = msg_get(i,"、估价原则");
+          is_accord=1;
+          if(str.indexOf("略")>=0)
+          {
+            document.getElementById("accord").value="略";
+          }
+      }
+      //结果报告中的估价方法自动提取
+      //这里需要注意的是，估价方法文本内也有顿号
+      //这里强行地要求对位一致，似乎有些不妥，后面可能会改改
+      if(str.indexOf("估价方法")>=0 && flag==2 && is_way==0)
+      {
+          //提取有效信息
+          document.getElementById("way").value=msg_get(i,"、估价结果");
+          is_way=1;
+          if(str.indexOf("略")>=0)
+          {
+            document.getElementById("way").value="略";
+          }
+          //看看估价方法是否缺乏定义
+          if(document.getElementById("way").value.indexOf("定义")<0 && document.getElementById("way").value.indexOf("根据")<0)
+          {
+            res+="(" + pt + ")" + "估价方法中缺少选用的估价方法的定义。" + "\n";
+            pt=pt+1;
+          }
+          //看看估价方法中是否缺乏使用该方法的理由
+          if(document.getElementById("way").value.indexOf("理由")<0 && document.getElementById("way").value.indexOf("因")<0)
+          {
+            res+="(" + pt + ")" + "估价方法中应具体说明所选用估价方法的理由。" + "\n";
+            pt=pt+1;
+          }
+      }
+      //结果报告中的估价结果自动提取
+      //这里要注意采用“、估价结果”来提取，因为前面有“估价结果报告”作为冲突
+      if(str.indexOf("、估价结果")>=0 && flag==2 && is_result==0)
+      {
+          //提取有效信息 -- 这里有三种可能，估价人员和注册房地产估价师，还有估价报告应用的限制
+          var str1,str2,str3;
+          var strr;
+          str1=msg_get(i,"、注册房地产估价师");
+          //alert(str1);
+          str2=msg_get(i,"、估价人员");
+          //alert(str2);
+          str3=msg_get(i,"、估价报告应用的限制");
+          //alert(str3);
+          if(str1.length<str2.length) strr=str1;
+          else strr=str2;
+          if(str1.length<str3.length) strr=str1;
+          else strr=str3; 
+          //alert(strr);
+          document.getElementById("result").value=strr;
+          is_result=1;
+          if(str.indexOf("略")>=0)
+          {
+            document.getElementById("result").value="略";
+          }
+      }
+      //结果报告中的估价人员自动提取
+      if((str.indexOf("估价人员")>=0 || str.indexOf("、注册房地产估价师")>=0) && flag==2 && is_staff==0)
+      {
+          //提取有效信息
+          document.getElementById("staff").value=msg_get(i,"、");
+          is_staff=1;
+          if(str.indexOf("略")>=0)
+          {
+            document.getElementById("staff").value="略";
+          }
+      }
+      //结果报告中的估价作业期自动提取
+      if((str.indexOf("估价作业期")>=0||str.indexOf("估价作业日期")>=0) && flag==2 && is_sche==0)
+      {
+          //提取有效信息
+          document.getElementById("sche").value=msg_get(i,"、");
+          is_sche=1;
+          if(str.indexOf("略")>=0)
+          {
+            document.getElementById("sche").value="略";
+          }
+      }
+      
+      //结果报告中的估价报告应用的有效期自动提取
+      if(str.indexOf("有效期")>=0 && flag==2 && is_effe==0)
+      {
+          //提取有效信息
+          document.getElementById("effe").value=msg_get(i,"、");
+          is_effe=1;
+          if(str.indexOf("略")>=0)
+          {
+            document.getElementById("effe").value="略";
+          }
+      }
+
+      //结果报告中的实地查勘期的自动提取
+      if(str.indexOf("实地查勘期")>=0 && flag==2 && is_cha==0)
+      {
+          //提取有效信息
+          document.getElementById("cha").value=msg_get(i,"、");
+          is_cha=1;
+          //alert(str);
+          if(str.indexOf("略")>=0)
+          {
+            document.getElementById("cha").value="略";
+          }
+      }
+
+      //结果报告中，估价依据的技术标准中，看看是否属于年代久远的规范，或者是标准
+      if(flag==2 && str.indexOf("房地产估价规范")>=0 && str.indexOf("1999")>=0)
+      {
+          res+="(" + pt + ")" + "《房地产估价规范》应该用2014年或最近几年的，而不是1999年的。" + "\n";
+          pt=pt+1;
+      }
+
+      if(flag==2 && str.indexOf("房地产估价基本术语标准")>=0 && str.indexOf("1999")>=0)
+      {
+          res+="(" + pt + ")" + "《房地产估价基本术语标准》应该用2014年或最近几年的，而不是1999年的。" + "\n";
+          pt=pt+1;
+      }
+
+      //在抵押报告中，我们还需要留意变现能力分析和风险提示信息的自动提取
+      if(str.indexOf("变现能力分析")>=0 && flag==2 && is_turn_money==0)
+      {
+          //提取有效信息
+          document.getElementById("turn_money").value=msg_get(i,"、");
+          is_turn_money=1;
+          if(str.indexOf("略")>=0)
+          {
+            document.getElementById("turn_money").value="略";
+          }
+      }
+
+      if(str.indexOf("风险提示")>=0 && flag==2 && is_disa==0)
+      {
+          //提取有效信息
+          document.getElementById("disa").value=msg_get(i,"估价技术报告");
+          is_disa=1;
+          if(str.indexOf("略")>=0)
+          {
+            document.getElementById("disa").value="略";
+          }
+      }
+      
+      //结果报告的估价对象描述中看看是否有关于土地使用性质，房屋产权,共有权等的描述
+      //结果报告中是否写明了房屋用途，土地使用人，他项权利等的描述
+      if(flag==2 && str.indexOf("土地使用")>=0)
+      {
+        land_use=1;
+        //alert(str);
+      }
+      
+      if(flag==2 && str.indexOf("产权")>=0)
+      {
+        pro=1;
+      }
+
+      if(flag==2 && str.indexOf("共有权")>=0)
+      {
+        is_common=1;
+      }
+
+      if(flag==2 && str.indexOf("房屋用途")>=0)
+      {
+        is_house_use=1;
+      }
+
+      if(flag==2 && str.indexOf("土地使用人")>=0)
+      {
+        is_land_use_man=1;
+      }
+
+      //看看他项权利的设定日期中是否包含有——年,月,日
+      if(flag==2 && str.indexOf("设定日期")>=0)
+      {
+        if(str.indexOf("年")<0 || str.indexOf("月")<0 || str.indexOf("日")<0)
+        {
+          res+="(" + pt + ")" + "看看估价报告的估价对象描述中，设定日期是否包括年，月，日。" + "\n";
+          pt=pt+1;
+        }
+      }
+
+      if(flag==2 && (str.indexOf("他项权利")>=0 || str.indexOf("他项权证")>=0) && is_taxiang==0)
+      {
+        res+="(" + "*" + ")" + "看看在估价报告中是否有交代如何处理没有注销的他项权利。" + "\n";
+        is_taxiang=1;
+      }
+      
+      //技术报告中，房屋改变用途或者重建的话，是否获得了政府部门的批准呢？--(上级公司的批准还不算哦)
+      if(flag==3 && (str.indexOf("改变用途")>=0||str.indexOf("用途改造")>=0||str.indexOf("重建")>=0))
+      {
+        use_change=1;
+        for(var j=i-2;j<=i+2;j++)
+        {
+          str=arr[j];
+          if(str.indexOf("政府")>=0 && str.indexOf("批准")>=0)
+          {
+            gov_permit=1;
+          }
+        }
+      }
+
+      //这里主要放置市场比较法的若干分析
+      //看看可比案例建筑规模的差距与估价对象是否在2倍以内
+      if(flag==3 && market==1)
+      {
+        if(str.indexOf("建筑面积（m2）")>=0 || str.indexOf("成交面积")>=0)
+        {
+          res+="(" + "*" + ")" + "在运用市场比较法的时候，注意每一个可比案例的建筑面积与估价对象的建筑面积规模的差距应该在2倍以内。" + "\n";
+        }
+        if(str.indexOf("交易情况")>=0 && str.indexOf("拍卖")>=0)
+        {
+          res+="(" + "*" + ")" + "在运用市场比较法的时候，如果在可比实例中，交易情况有拍卖，记得注意修正。" + "\n";
+        }
+        if(str.indexOf("修正")>=0)
+        {
+          res+="(" + "*" + ")" + "在运用市场比较法的时候，注意修正幅度一般不超过20%。" + "\n";
+        }
+        //如果用途是商服和办公的话，这里有一个概念判定
+        if(str.indexOf("办公")>=0)
+        {
+          usel=1;  
+        }
+        if(str.indexOf("商服")>=0)
+        {
+          usel=2;
+        }
+        if(usel==1 && str.indexOf("区域繁华程度")>=0 && is_k1==0)
+        {
+          is_k1=1;
+          res+="(" + pt + ")" + "办公用房区位因素不应包括'区域繁华程度',可用'商务办公氛围或聚集度'代替。" + "\n";
+          pt=pt+1;
+        }
+        if(usel==2 && (str.indexOf("商务办公氛围")>=0 || str.indexOf("聚集度")>=0 ) && is_k2==0)
+        {
+          is_k2=1;
+          res+="(" + pt + ")" + "商业用房区位因素不应包括'商务办公氛围或聚集度',可用'区域繁华程度'代替。" + "\n";
+          pt=pt+1;
+        }
+        //楼层是区位因素，而不是实物因素
+        if(str.indexOf("实物状况")>=0) statek=1;
+        if(str.indexOf("权益状况")>=0) statek=2;
+        if(str.indexOf("区位状况")>=0) statek=3;
+        if(str.indexOf("楼层")>=0 && statek!=3 && floor_check==0)
+        {
+          floor_check=1;
+          res+="(" + pt + ")" + "楼层属于区位状况因素，而不是实物或权益状况因素。" + "\n";
+          pt=pt+1;
+        } 
+        //这是一个不一定成立的错误，就是楼层信息应该包括总楼层
+        if(str.indexOf("层/")>=0 && floor_tot==0)
+        {
+          floor_tot=1;
+        }
+        //建立比较基础中，一定要有四大统一，看看是否存在缺项漏项
+        //统一付款方式，计价方式，财产范围，税费负担
+        if(str.indexOf("建立比较基础")>=0)
+        {
+          var strr=arr[i+1];
+          if(strr.indexOf("付款方式")>=0) ccnt=ccnt+1;
+          if(strr.indexOf("计价方式")>=0) ccnt=ccnt+1;
+          if(strr.indexOf("财产范围")>=0) ccnt=ccnt+1;
+          if(strr.indexOf("税费负担")>=0) ccnt=ccnt+1;
+        }
+        //看看内部装修中是否存在毛坯房
+        if(str.indexOf("毛坯")>=0 && is_bad==0)
+        {
+          is_bad=1;
+        }
+        //看看三种状况--实物，权益，区位，说明了各子项调整系数和权重没有
+        if(str.indexOf("调整系数")>=0 && str.indexOf("权重")>=0 && judge_weight==0)
+        {
+          judge_weight=1;
+        }
+        //看看最后计算结果的时候，是否仅仅因为三个可比案例的调整结果接近，就采用简单算术平均
+        if( (str.indexOf("接近")>=0 || str.indexOf("相近")>=0) && str.indexOf("算术平均")>=0 && judge_near==0 )
+        {
+          judge_near=1;
+        }
+        //采用算术平均应该有理由
+        if(str.indexOf("算术平均")>=0 && (str.indexOf("因为")<0 && str.indexOf("因")<0 && str.indexOf("理由")<0 && str.indexOf("依据")<0) && judge_reason==0)
+        {
+          judge_reason=1;
+        }
+        //比准价格应为收益价格
+        if(str.indexOf("比准价格")>=0)
+        {
+          is_compare_error=1;
+        }
+        //估价对象比准价格应为比准价格
+        if(str.indexOf("估价对象比准价格")>=0)
+        {
+          is_g_compare=1;
+        }
+      }
+      
+      //这里主要放置收益法的若干分析
+      //看看是否分析了租金的未来变化趋势
+      if(flag==3 && income==1)
+      {
+        if(str.indexOf("收益年期")>=0 || str.indexOf("收益年限")>=0)
+        {
+          income_dur=1;
+        }
+      }
+      if(flag==3 && income==1 && str.indexOf("租金水平")>=0 && str.indexOf("趋势")>=0 && is_rent_dev==0)
+      {
+        is_rent_dev=1;
+      }
+      //看看年运营费用中是否包括土地使用费
+      if(flag==3 && income==1 && str.indexOf("年运营费用")>=0 && str.indexOf("土地使用费")>=0 && is_land_use==0)
+      {
+        is_land_use=1;
+      }
+      //看看年管理费中是否包括水、电、气、热等费用
+      if(flag==3 && income==1 && str.indexOf("年管理费")>=0 && str.indexOf("水、电、气、热")>=0)
+      {
+        is_manage_fee=1;
+      }
+      //看看年保险费中是否运用了年租金收入作为基数，如果使用的话，这是错误的
+      if(flag==3 && income==1 && str.indexOf("年保险费")>=0 && str.indexOf("租金收入")>=0)
+      {
+        is_base_error=1;
+      }
+      //看看资本化率的取值是否存在依据
+      if(flag==3 && income==1 && str.indexOf("资本化率")>=0)
+      {
+        if(str.indexOf("存款")>=0 || str.indexOf("贷款")>=0 || str.indexOf("投资收益率")>=0)
+        {
+          is_cap_error=1;
+        }
+        if(str.indexOf("依据")<0 && str.indexOf("理由")<0)
+        {
+          is_cap_error=1;
+        }
+      }
+
+      //年有效毛收入，它的计算天数应该是365天，写300天判错误
+      if(flag==3 && income==1 && (str.indexOf("年有效毛收入=")>=0) && (!str.indexOf("365")>=0))
+      {
+        is_full_year=1;
+      }
+
+      //看看收益法中是否有关于收租损失的描述
+      if(flag==3 && income==1 && str.indexOf("收租损失")>=0 && is_rent_lose==0)
+      {
+        //alert(str);
+        is_rent_lose=1;  
+      }
+
+      //看看是否说明了报酬率确定的理由，报酬率是否是预测值
+      if(flag==3 && income==1 && str.indexOf("报酬率")>=0)
+      {
+        if(str.indexOf("依据")>=0 || str.indexOf("理由")>=0 || str.indexOf("原因")>=0)
+        {
+          is_pay_acc=1;
+        }
+        if(str.indexOf("预测值")>=0)
+        {
+          is_pay_guess=1;
+        }
+      }
+
+      //看看收益法的收益期限是否考虑了经济寿命
+      if(flag==3 && income==1 && str.indexOf("经济寿命")>=0 && is_eco_life==0)
+      {
+        is_eco_life=1;
+      }
+      
+      //在收益期限的计算中，看看土地使用权是否续期，建筑物是否予以补偿
+      if(flag==3 && income==1 && (str.indexOf("收益期")>=0 || str.indexOf("收益期限")>=0))
+      {
+        for(var j=i+1;j<=i+5;j++)
+        {
+          str=arr[j];
+          if(str.indexOf("土地使用权")>=0 && str.indexOf("续期")>=0)
+          {
+            is_land_use_continue=1;
+          }
+          if(str.indexOf("残值")>=0 && str.indexOf("补偿")>=0)
+          {
+            is_junk_pay=1;
+          }
+        }
+      }
+
+      //在抵押估价中，净收益变化趋势的分析中，净收益增长率要遵循谨慎原则，采用保守估计
+      if(flag==3 && income==1 && mort==1)
+      {
+        if(str.indexOf("净收益")>=0 && str.indexOf("保守")>=0)
+        {
+          is_protect=1;
+        }
+      }
+      
+      //这里主要放置成本法的若干分析
+      //基准地价的交代是否清楚，土地价格的内涵是否有交代
+      if(flag==3 && cost==1 && str.indexOf("基准地价")>=0)
+      {
+        is_base_price=1;
+      }
+      if(flag==3 && cost==1 && str.indexOf("土地价格")>=0 && str.indexOf("内涵")>=0)
+      {
+        is_land_price_mean=1;
+      }
+      
+     //建筑物折旧的计算中是否考虑了经济寿命对建筑物价值的影响
+      //土地使用权是否可以续期，建筑物经济寿命到期之后，残值是否给予补偿
+      if(flag==3 && cost==1 && str.indexOf("折旧")>=0)
+      {
+        for(var j=i+1;j<=i+5;j++)
+        {
+          str=arr[j];
+          if(str.indexOf("经济寿命")>=0)
+          {
+            is_consider_eco=1;
+          }
+          if(str.indexOf("土地使用权")>=0 && str.indexOf("续期")>=0)
+          {
+            is_land_use_continue=1;
+          }
+          if(str.indexOf("残值")>=0 && str.indexOf("补偿")>=0)
+          {
+            is_junk_pay=1;
+          }
+        }
+      }
+      
+      //建筑物重置价格中是否考虑了建安费,相关销售费用
+      if(flag==3 && cost==1 && str.indexOf("重置价格")>=0)
+      {
+        //考虑重置价格几段中的后面几段描述
+        for(var j=i+1;j<=i+5;j++)
+        {
+          str=arr[j];
+          if(str.indexOf("建安费")>=0 || str.indexOf("精装修成本费用")>=0)
+          {
+            is_cal_furn=1;
+          }
+          if(str.indexOf("销售费用")>=0)
+          {
+            is_cal_sale=1;
+          }
+        }
+      }
+      
+      //这里主要放置假设开发法的若干分析
+      //未来的投资利息中应该包括在建工程投资的利息
+      if(flag==3 && susp==1 && str.indexOf("投资利息")>=0)
+      {
+        for(var j=i-5;j<=i+5;j++)
+        {
+          str=arr[j];
+          if(str.indexOf("在建工程投资利息")>=0||str.indexOf("在建工程投资的利息")>=0)
+          {
+            is_susp_interest=1;
+          }
+        }
+      }
+
+      //在计算在建工程的各项成本及税费的时候，可以在这里做一个记号
+      if(flag==3 && susp==1 && str.indexOf("各项成本及税费")>=0)
+      {
+        tax_fee=1;
+      }
+      
+      //如果在假设开发法中，未来的利润没有去计算，则判错
+      if(tax_fee==1 && flag==3 && susp==1 && str.indexOf("利润")>=0 && is_susp_profit==0)
+      {
+        is_susp_profit=1;
+      }
+     
+     //估价结果的确定中，是否缺乏理由？
+     if(flag==3 && str.indexOf("估价结果")>=0 && str.indexOf("确定")>=0 && is_result_base==0)
+     {
+       for(var j=i+1;j<=i+5;j++)
+       {
+         str=arr[j];
+         if(str.indexOf("理由")>=0||str.indexOf("根据")>=0||str.indexOf("依据")>=0||str.indexOf("由于")>=0)
+         {
+           is_result_base=1;
+         }
+       }
+     }
+
+     //最后，我们来看看附件中的出错情况
+     //如果是抵押报告的话，看看法定优先受偿款的情况
+     if(flag==4 && mort==1 && str.indexOf("法定优先受偿款")>=0 && is_fa==0)
+     {
+       is_fa=1;
+     }
+     //如果使用了比较法的话，看看附件中是否有可比实例位置图和外观照片
+     if(flag==4 && str.indexOf("可比实例位置图")>=0 && is_kebi==0 && market==1)
+     {
+       is_kebi=1;
+     }
+     if(flag==4 && str.indexOf("外观照片")>=0 && is_waiguan==0 && market==1)
+     {
+       is_waiguan=1;
+     }
+     if(flag==4 && (str.indexOf("专业帮助")>=0 || str.indexOf("相关意见")>=0))
+     {
+       is_help=1;
+     }
+
+  }
+  
+  //看看估价报告出具日期是否改写成了估价作业期
+  if(fs==0 && w0==1 && is_ferror==1)
+  {
+    res+="(" + pt + ")" + "封面中的'估价作业期'应为'估价报告出具日期'。" + "\n";
+    pt=pt+1;
+  }
+
+  //委托函中看看是否写清楚了估价方法的定义
+  if(ws==0 && w1==1 && is_w_way==0)
+  {
+    res+="(" + pt + ")" + "在致估价委托人函中应明确选用的估价方法。" + "\n";
+    pt=pt+1;
+  }
+
+  if(ws==0 && w1==1 && is_w_way==1 && is_ww_way==0)
+  {
+    res+="(" + pt + ")" + "在致估价委托人函中应明确估价方法的定义和理由。" + "\n";
+    pt=pt+1;
+  }
+
+  //封面也要设定为无哦
+  if(document.getElementById("fname").value=="" || document.getElementById("fname").value==null)
+  {
+    document.getElementById("fname").value="无";
+    //如果封面有省略信息，则填写'略'
+    if(fs==1) document.getElementById("fname").value="略";
+  }
+
+  if(document.getElementById("fwt").value==null || document.getElementById("fwt").value=="")
+  {
+    document.getElementById("fwt").value="无";
+    if(fs==1) document.getElementById("fwt").value="略";
+  }
+
+  if(document.getElementById("fagent").value==null || document.getElementById("fagent").value=="")
+  {
+    document.getElementById("fagent").value="无";
+    if(fs==1) document.getElementById("fagent").value="略";
+  }
+
+  if(document.getElementById("fgjs").value==null || document.getElementById("fgjs").value=="")
+  {
+    document.getElementById("fgjs").value="无";
+    if(fs==1) document.getElementById("fgjs").value="略";
+  }
+
+  if(document.getElementById("fdate").value==null || document.getElementById("fdate").value=="")
+  {
+    document.getElementById("fdate").value="无";
+    if(fs==1) document.getElementById("fdate").value="略";
+  }
+
+  if(document.getElementById("fno").value==null || document.getElementById("fno").value=="")
+  {
+    document.getElementById("fno").value="无";
+    if(fs==1) document.getElementById("fno").value="略";
+  }
+  
+  //在这里判断委托方函中是否缺估价目的
+  if(document.getElementById("w_aim").value==null || document.getElementById("w_aim").value=="" || document.getElementById("w_aim").value=="无")
+  {
+    document.getElementById("w_aim").value="无";
+    if(ws==1) document.getElementById("w_aim").value="略";
+    //致委托方函中缺少估价目的
+    if(document.getElementById("w_aim").value=="无")
+    {
+      res+="(" + pt + ")" + "致委托方函中缺估价目的。" + "\n";
+      pt=pt+1;
+    }
+  }
+
+  if(document.getElementById("w_des").value==null || document.getElementById("w_des").value=="")
+  {
+    document.getElementById("w_des").value="无";
+    if(ws==1) document.getElementById("w_des").value="略";
+  }
+
+  if(is_w_period==0)
+  {
+      document.getElementById("w_period").value="无";
+      if(ws==1) document.getElementById("w_period").value="略";
+  }
+
+  if(is_w_check==0)
+  {
+      document.getElementById("w_check").value="无";
+      if(ws==1) document.getElementById("w_check").value="略";
+  }
+
+  if(is_w_way==0)
+  {
+      document.getElementById("w_way").value="无";
+      if(ws==1) document.getElementById("w_way").value="略";
+  }
+
+  if(is_w_time==0)
+  {
+      document.getElementById("w_time").value="无";
+      if(ws==1) document.getElementById("w_time").value="略";
+  }
+
+  if(is_w_type==0)
+  {
+      document.getElementById("w_type").value="无";
+      if(ws==1) document.getElementById("w_type").value="略";
+  }
+
+  if(ws==0 && w1==1 && is_w_depar==0)
+  {
+      res+="(" + pt + ")" + "致函方应为X房地产估价有限公司而不是分公司。" + "\n";
+      pt=pt+1;
+  }
+
+  //结果报告中是否有共有权的描述
+  if(is_common==0)
+  {
+      res+="(" + pt + ")" + "估价对象中未说明估价对象是否有共有权。" + "\n";
+      pt=pt+1;
+  }
+
+  //报告中提到的建筑物结构不同
+  if(is_stru_diff==1)
+  {
+    //结果报告中说估价对象为钢架结构，此处说估价对象为钢混结构，说法不一致。
+    res+="(" + "*" + ")" + "结果报告中说估价对象为" + "\n(A)" + stru + ",此处说估价对象为\n";
+    for(var ks=0;ks<cnt;ks=ks+1)
+    { 
+      res+="(" + (ks+1) + ")" + house_struct[ks]  + "\n" 
+    }
+    res=res+"大家看看是否是一致的。" + "\n";
+    pt=pt+1;
+  }
+
+  //如果结果报告中没有有效期，实地查勘期，变现能力分析，风险提示的描述
+  if(is_effe==0)
+  {
+      document.getElementById("effe").value="无";
+  }
+
+  if(is_cha==0)
+  {
+      document.getElementById("cha").value="无";
+  }
+
+  if(is_turn_money==0)
+  {
+      document.getElementById("turn_money").value="无";
+  }
+
+  if(is_disa==0)
+  {
+      document.getElementById("disa").value="无";
+  }
+  
+  //看看结果报告中是否存在缺项，漏项的情况
+  //包括估价目的，估价对象详细描述,估价时点,估价原则,估价依据等等
+  if(document.getElementById("aim").value=="")
+  {
+    res+="(" + pt + ")" + "缺少估价目的。" + "\n";
+    document.getElementById("aim").value="无";
+    pt=pt+1;
+  }
+  
+  if(document.getElementById("des").value=="")
+  {
+    res+="(" + pt + ")" + "缺少估价对象详细描述。" + "\n";
+    document.getElementById("des").value="无";
+    pt=pt+1;
+  }
+  
+  //2001年真题有关于估价对象描述的错误，这里也附上吧
+  if(document.getElementById("des").value.length<200)
+  {
+    res+="(" + pt + ")" + "估价对象的描述不够具体。" + "\n";
+    pt=pt+1;
+  }
+  
+  if(document.getElementById("e_time").value=="")
+  {
+    res+="(" + pt + ")" + "缺少估价时点。" + "\n";
+    document.getElementById("e_time").value="无";
+    pt=pt+1;
+  }
+  
+  if(document.getElementById("def").value=="")
+  {
+    res+="(" + pt + ")" + "缺少价值定义。" + "\n";
+    document.getElementById("def").value="无";
+    pt=pt+1;
+  }
+  
+  if(document.getElementById("prin").value=="")
+  {
+    res+="(" + pt + ")" + "缺少估价原则。" + "\n";
+    document.getElementById("prin").value="无";
+    pt=pt+1;
+  }
+  
+  if(document.getElementById("accord").value=="")
+  {
+    res+="(" + pt + ")" + "缺少估价依据。" + "\n";
+    document.getElementById("accord").value="无";
+    pt=pt+1;
+  }
+  
+  if(document.getElementById("way").value=="")
+  {
+    res+="(" + pt + ")" + "缺少估价方法。" + "\n";
+    document.getElementById("way").value="无";
+    pt=pt+1;
+  }
+  
+  if(document.getElementById("result").value=="")
+  {
+    res+="(" + pt + ")" + "缺少估价结果。" + "\n";
+    document.getElementById("result").value="无";
+    pt=pt+1;
+  }
+  
+  if(document.getElementById("staff").value=="")
+  {
+    res+="(" + pt + ")" + "缺少估价人员。" + "\n";
+    document.getElementById("staff").value="无";
+    pt=pt+1;
+  }
+  
+  //估价人员签字中，不应该用盖章，而应该用估价师的签字信息
+  if(document.getElementById("staff").value.indexOf("盖章")>=0)
+  {
+    res+="(" + pt + ")" + "估价结果报告中注册房地产估价师应亲笔签名,不能用盖章代替签名。" + "\n";
+    pt=pt+1;
+  }
+  
+  if(document.getElementById("sche").value=="")
+  {
+    res+="(" + pt + ")" + "缺少估价作业期。" + "\n";
+    document.getElementById("sche").value="无";
+    pt=pt+1;
+  }
+  
+  if(document.getElementById("effe").value=="无")
+  {
+    res+="(" + pt + ")" + "缺少估价报告应用的有效期。" + "\n";
+    document.getElementById("effe").value="无";
+    pt=pt+1;
+  }
+
+  if(document.getElementById("cha").value=="无")
+  {
+    res+="(" + pt + ")" + "结果报告中缺少估价报告的实地查勘期。" + "\n";
+    pt=pt+1;
+  }
+
+  if(document.getElementById("turn_money").value=="无" && mort==1)
+  {
+    res+="(" + pt + ")" + "抵押报告的结果报告中缺少变现能力分析。" + "\n";
+    pt=pt+1;
+  }
+
+  if(document.getElementById("disa").value=="无" && mort==1)
+  {
+    res+="(" + pt + ")" + "抵押报告的结果报告中缺少风险提示。" + "\n";
+    pt=pt+1;
+  }
+  
+  //结果报告中估价对象中土地使用性质和产权是否交代
+  if(land_use==0)
+  {
+    res+="(" + pt + ")" + "缺少土地使用性质描述。" + "\n";
+    pt=pt+1;
+  }
+
+  //结果报告中，房屋用途和土地使用人是否交代
+  if(is_house_use==0 || is_land_use_man==0)
+  {
+    res+="(" + pt + ")" + "估价对象中未说明估价对象房屋用途或土地使用人。" + "\n";
+    pt=pt+1;
+  }
+  
+  if(pro==0)
+  {
+    res+="(" + pt + ")" + "缺少房屋产权描述。" + "\n";
+    pt=pt+1;
+  }
+  
+  //技术报告中估价对象用途改造是否得到了政府的批准
+  if(use_change==1 && gov_permit==0)
+  {
+    res+="(" + pt + ")" + "没有说明房屋改变用途及重建是否经政府有关部门批准。" + "\n";
+    pt=pt+1;
+  }
+  
+  //看看租金水平变化趋势是否有所交代
+  if(income==1 && is_rent_dev==0)
+  {
+    res+="(" + pt + ")" + "未分析租金水平的变化趋势。" + "\n";
+    pt=pt+1;
+  }
+  
+  if(income==1 && is_land_use==1)
+  {
+    res+="(" + pt + ")" + "年运营费用中不应计算土地使用费。" + "\n";
+    pt=pt+1;
+  }
+  
+  if(income==1 && is_manage_fee==0)
+  {
+    res+="(" + pt + ")" + "未说明当地规定的管理费中是否包括水、电、气、热等费用。" + "\n";
+    pt=pt+1;
+  }
+  
+  if(income==1 && is_base_error==1)
+  {
+    res+="(" + pt + ")" + "保险计算基数错，不应以年租金收入为基数，应以建筑物价值为基数计算。" + "\n";
+    pt=pt+1;
+  }
+  
+  if(income==1 && is_cap_error==1)
+  {
+    res+="(" + pt + ")" + "资本化率采用存款,贷款利率或投资收益率是错误的，或者说其取值未说明理由。" + "\n";
+    pt=pt+1;
+  }
+  
+  if(income==1 && is_compare_error==1)
+  {
+    res+="(" + pt + ")" + "比准价格应为收益价格。" + "\n";
+    pt=pt+1;
+  }
+
+  //看看收益法中是否考虑了收租损失的情况(其实还有空置和收租损失)
+  if(income==1 && is_rent_lose==0)
+  {
+    res+="(" + pt + ")" + "缺收租损失率的说明或者说没有考虑收租损失。" + "\n";
+    pt=pt+1;
+  }
+
+  //看看收益法中，对报酬率是否说明了理由，是否是预测值
+  if(income==1 && is_pay_acc==0)
+  {
+    res+="(" + pt + ")" + "报酬率的确定未说明理由或者缺少报酬率的确定过程。" + "\n";
+    pt=pt+1;
+  }
+  
+  if(income==1 && is_pay_guess==0)
+  {
+    res+="(" + pt + ")" + "未说明报酬率是预测值。" + "\n";
+    pt=pt+1;
+  }
+
+  //看看收益法中，对于收益期限的计算是否考虑到了经济寿命
+  if(income==1 && is_eco_life==0)
+  {
+    res+="(" + pt + ")" + "本报告在收益法的收益期限的计算中，没有考虑到经济寿命对房屋的影响，只考虑了房屋耐用年限。" + "\n";
+    pt=pt+1;
+  }
+
+  //净收益流计算中的保守估计
+  if(income==1 && mort==1 && is_protect==0)
+  {
+    res+="(" + pt + ")" + "抵押目的估价遵循谨慎原则，在确定净收益和净收益流模式时应保守估计。" + "\n";
+    pt=pt+1;
+  }
+
+  //收益期限的计算中，土地使用权是否续期，建筑物是否予以补偿
+  if(income==1 && is_land_use_continue==0)
+  {
+    res+="(" + pt + ")" + "收益法中的建筑物折旧中没有约定土地使用权是否可以续期。" + "\n";
+    pt=pt+1;
+  }
+  
+  if(income==1 && is_junk_pay==0)
+  {
+    res+="(" + pt + ")" + "收益法中的建筑物折旧中没有约定建筑物残值是否予以补偿。" + "\n";
+    pt=pt+1;
+  }
+
+  //年有效毛收入的计算中，看看全年是不是以365天计算的
+  if(income==1 && is_full_year==1)
+  {
+    res+="(" + pt + ")" + "全年收益天数应该按365天计算。" + "\n";
+    pt=pt+1;
+  }
+  
+  if(cost==1 && is_land_price_mean==0)
+  {
+    res+="(" + pt + ")" + "土地价格的内涵未交代清楚。" + "\n";
+    pt=pt+1;
+  }
+  
+  if(cost==1 && is_cal_furn==0)
+  {
+    res+="(" + pt + ")" + "未计算精装修成本费用(建安费)。" + "\n";
+    pt=pt+1;
+  }
+  
+  if(cost==1 && is_cal_sale==0)
+  {
+    res+="(" + pt + ")" + "成本法中未考虑相关销售费用。" + "\n";
+    pt=pt+1;
+  }
+  
+  if(cost==1 && is_consider_eco==0)
+  {
+    res+="(" + pt + ")" + "成本法中未考虑建筑物经济寿命对建筑物价值的影响。" + "\n";
+    pt=pt+1;
+  }
+  
+  if(cost==1 && is_land_use_continue==0)
+  {
+    res+="(" + pt + ")" + "成本法的建筑物折旧中没有约定土地使用权是否可以续期。" + "\n";
+    pt=pt+1;
+  }
+  
+  if(cost==1 && is_junk_pay==0)
+  {
+    res+="(" + pt + ")" + "成本法的建筑物折旧中没有约定建筑物残值是否予以补偿。" + "\n";
+    pt=pt+1;
+  }
+  
+  if(susp==1 && is_susp_interest==0)
+  {
+    res+="(" + pt + ")" + "在假设开发法中，未来发生的投资利息中应包括在建工程投资的利息。" + "\n";
+    pt=pt+1;
+  }
+
+  if(susp==1 && is_susp_profit==0)
+  {
+    res+="(" + pt + ")" + "在假设开发法中，未来发生的利润未计算。" + "\n";
+    pt=pt+1;
+  }
+ 
+  //如果比较法的楼层信息中没有包括总层数
+  if(market==1 && floor_tot==0)
+  {
+    res+="(" + pt + ")" + "未说明可比实例总楼层。" + "\n";
+    pt=pt+1;
+  }
+
+  //如果比较法的建立比较基础环节存在缺项的话
+  if(market==1 && ccnt<4)
+  {
+    res+="(" + pt + ")" + "建立比较基础中的四大统一存在缺项的情况:付费方式，计价方式，财产范围，税费负担。" + "\n";
+    pt=pt+1;
+  }
+  
+  //如果内部装修存在毛坯房的话，修正系数要特别注意
+  if(is_bad==1)
+  {
+    res+="(" + "*" + ")" + "如果可比案例存在毛坯房的话，看看修正系数是否差距比较大，如果不大的话，则有错误。" + "\n";
+    pt=pt+1;
+  }
+
+  //看看比较法中，估价对象最后是否有处理三种状况的调整系数因子和权重
+  if(market==1 && judge_weight==0)
+  {
+    res+="(" + pt + ")" + "未说明区位状况，权益状况和实物状况各子项调整系数各自的权重。" + "\n";
+    pt=pt+1;
+  }
+  
+  //如果比较法中，判断了算术平均的理由，仅仅是因为三个经过调整后的可比案例价格比较接近
+  if(market==1 && judge_near==1)
+  {
+    res+="(" + pt + ")" + "三个调整后的可比案例价格接近，不是采用算术平均的理由。" + "\n";
+    pt=pt+1;
+  }
+
+  //如果存在'估价对象比准价格'这样的写法，应该报错
+  if(market==1 && is_g_compare==1)
+  {
+    res+="(" + pt + ")" + "估价对象比准价格应该为比准价格。。" + "\n";
+    pt=pt+1;
+  }
+
+  //如果比较法中，判断了算术平均，而没有说明理由
+  if(market==1 && judge_reason==1)
+  {
+    res+="(" + pt + ")" + "技术报告中用简单算术平均来计算三个可比案例，却没有阐明这么做的理由。" + "\n";
+    pt=pt+1;
+  }
+  
+   //估价结果确定中，理由的检查
+  if(is_result_base==0)
+  {
+    res+="(" + pt + ")" + "未说明估价结果的确定的理由。" + "\n";
+    pt=pt+1;
+  }
+  
+   //看看这五个阶段，有哪一个漏掉了
+  if(w0==0) 
+  {
+    //常见
+    res+="(" + pt + ")" + "估价报告中缺少封面和目录。" + "\n";
+    pt=pt+1;
+  }
+  if(w1==0) 
+  {
+    //常见
+    res+="(" + pt + ")" + "估价报告中缺少委托人函。" + "\n";
+    pt=pt+1;
+  }
+  if(w2==0) 
+  {
+    //这种错误极少见
+    res+="(" + pt + ")" + "估价报告中缺少结果报告。" + "\n";
+    pt=pt+1;
+  }
+  if(w3==0) 
+  {
+    //这种错误极少见
+    res+="(" + pt + ")" + "估价报告中缺少技术报告。" + "\n";
+    pt=pt+1;
+  }
+  if(w4==0) 
+  {
+    //常见
+    res+="(" + pt + ")" + "估价报告中缺少附录。" + "\n";
+    pt=pt+1;
+  }
+  
+  //对于收益法来说，这里做一点提示
+  if(income==1)
+  {
+    res+="(" + "*" + ")" + "看看估价报告的有效毛收入中是否考虑了空置及租金损失率(出租率)影响。" + "\n";
+    res+="(" + "*" + ")" + "为了增强客观性，收益法可以选择多个参照物。" + "\n";
+    res+="(" + "*" + ")" + "确定资本化率，尽量参照多个实例。" + "\n";
+    res+="(" + "*" + ")" + "像超市，写字楼这样的商业性质的房地产，应该先用收益法估价，再用比较法估价。" + "\n";
+    res+="(" + "*" + ")" + "如有租赁合同且合同合理，则在租约期内应采用合同租金，租约期外应采用市场租金计算。" + "\n";
+    if(is_base_price==1)
+    {
+      res+="(" + "*" + ")" + "基准地价修正法中年期修正方法(公式)应该用指数的而不是线性的。" + "\n";
+    }
+    //看看技术报告中的收益年限是否和建筑物的用途是对应的
+    if(income_dur==1)
+    {
+      res+="(" + "*" + ")" + "仔细检查一下收益年限是否是正确的。商业，旅游，娱乐为40年，工业和服务业为50年，住宅为70年。" + "\n";
+    }
+  }
+
+  //对于比较法来说，这里做一点提示
+  if(market==1)
+  {
+    res+="(" + "*" + ")" + "注意比估价对象条件好的比较因素，它的修正系数应该比估价对象要大，否则要小。" + "\n";
+    res+="(" + "*" + ")" + "注意楼层越高，修正系数应该越大。" + "\n";
+  }
+
+  //附件中是否有法定优先受偿款
+  if(ls==0 && w4==1 && is_fa==0 && mort==1)
+  {
+    res+="(" + pt + ")" + "附件中缺估价对象法定优先受偿款调查情况说明。" + "\n";
+    pt=pt+1;
+  }
+  
+  //比较法使用的情况下，附件中是否有可比实例位置图和外观照片
+  if(ls==0 && w4==1 && is_kebi==0 && market==1)
+  {
+    res+="(" + pt + ")" + "附件中缺可比实例位置图。" + "\n";
+    pt=pt+1;
+  }
+
+  if(ls==0 && w4==1 && is_waiguan==0 && market==1)
+  {
+    res+="(" + pt + ")" + "附件中缺外观照片。" + "\n";
+    pt=pt+1;
+  }
+  
+  //看看估价报告的附件中是否有专业帮助的相关信息
+  if(ls==0 && w4==1 && is_help==0)
+  {
+    res+="(" + pt + ")" + "附件中缺专业帮助情况和相关专业意见。" + "\n";
+    pt=pt+1;
+  }
+  
+  
+  document.getElementById("autos").value=res;
+
+  }
+  
+    function msg_get(ii,sp)
+        {
+          //提取有效信息
+          var j=ii;
+          if(arr[j].indexOf("、")>=0) j=j+1;
+          var msg;
+          msg="";
+          if(arr[j].indexOf("：")>=0) 
+          {
+            msg=arr[j];
+          }
+          while(arr[j].indexOf(sp)<0 && arr[j].indexOf("估价技术报告")<0 && arr[j].indexOf("法定代表人")<0 && arr[j].indexOf("估价结果报告")<0)
+          {
+             //要查看那一行是不是空白的
+             
+             if(arr[j].length>0)
+             {
+               msg += arr[j];
+              }
+              j++;
+          }
+          if(sp=="：") 
+          {
+            msg=msg.slice(str.indexOf(sp)+1);
+          }
+          if(msg.indexOf("。")>=0) 
+          {
+            msg = msg.substr(0, msg.length - 1); 
+          }
+          return msg;
+  }
+  
+  function fmsg_get(ii,sp)
+  {
+    var j=ii;
+    var msg;
+    msg=arr[j];
+    j=j+1;
+    while(arr[j].indexOf(sp)<0 && arr[j].indexOf("致估价委托")<0)
+    {
+            //要查看那一行是不是空白的
+             if(arr[j].length>0)
+             {
+               msg += arr[j];
+              }
+              j++;
+          }
+          msg=msg.slice(msg.indexOf(sp)+1);
+          msg = msg.replace(/^\s*|\s*$/g,"");
+          msg = msg.replace(/\s*/g,"");
+          return msg;
+    }
+
+
+</script>
+
+
+
+   
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <script src="https://cdn.jsdelivr.cn/npm/jquery@1.12.4/dist/jquery.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+  </body>
+</html>
